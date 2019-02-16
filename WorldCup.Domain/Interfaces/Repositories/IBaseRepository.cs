@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WorldCup.Domain.Interfaces
+namespace WorldCup.Domain.Interfaces.Repositories
 {
     /// <summary>
     /// Interface Repositorio Base criado para garantir
@@ -15,5 +15,6 @@ namespace WorldCup.Domain.Interfaces
         TEntity Add(TEntity obj);
         bool Remove(long id);
         bool Update(TEntity obj);
+        void Dispose();
     }
 }

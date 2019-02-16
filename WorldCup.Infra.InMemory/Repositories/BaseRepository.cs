@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using WorldCup.Domain.Interfaces;
+using WorldCup.Domain.Interfaces.Repositories;
 using WorldCup.Infra.InMemory.Context;
 
 namespace WorldCup.Infra.InMemory.Repositories
