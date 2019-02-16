@@ -5,13 +5,13 @@ using WorldCup.Domain.Entities;
 
 namespace WorldCup.XUnitTest
 {
+    /// <summary>
+    /// Classe criada para garantir o funcionamento
+    /// das operações realizadas pela classe
+    /// @Autor: Alexander Silva
+    /// </summary>
     public class TeamTest
-    {
-        /// <summary>
-        /// Classe criada para garantir o funcionamento
-        /// das operações realizadas pela classe
-        /// @Autor: Alexander Silva
-        /// </summary>
+    {        
         [Fact]
         public void TestCreatingNewTeam()
         {
