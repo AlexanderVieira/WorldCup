@@ -10,9 +10,10 @@ namespace WorldCup.Domain.Interfaces
     /// <typeparam name="TEntity"></typeparam>
     public interface IBaseRepository<TEntity> where TEntity : class
     {
-        IEnumerable<TEntity> GetAll(TEntity obj);
-        void Add(TEntity obj);
-        bool Remove(TEntity obj);
+        IEnumerable<TEntity> GetAll();
+        TEntity GetById(long id);
+        TEntity Add(TEntity obj);
+        bool Remove(long id);
         bool Update(TEntity obj);
     }
 }

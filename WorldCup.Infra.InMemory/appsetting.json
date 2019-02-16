@@ -1,0 +1,5 @@
+{
+  "ConnectionString": {
+    "WorldCupDB": "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\Alex\\Documents\\sales_db.mdf;Integrated Security=True;Connect Timeout=30"
+  }
+}

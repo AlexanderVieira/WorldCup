@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace WorldCup.Domain.Entities
+﻿namespace WorldCup.Domain.Entities
 {
     /// <summary>
     /// Entidade que representa um objeto time
@@ -20,15 +16,16 @@ namespace WorldCup.Domain.Entities
 
         }
 
-        public Team(string name, string flag)
+        public Team(long teamId, string name, string flag)
         {
+            TeamId = teamId;
             Name = name;
             Flag = flag;
         }
 
         public override string ToString()
         {
-            return $"{Name} {Flag}";
+            return $"{TeamId.ToString()} {Name} {Flag}";
         }
     }
 }

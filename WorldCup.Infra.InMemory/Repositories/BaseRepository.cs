@@ -1,35 +1,61 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using WorldCup.Domain.Interfaces;
+using WorldCup.Infra.InMemory.Context;
 
 namespace WorldCup.Infra.InMemory.Repositories
 {
-    public class BaseRepository<TEntity> : IDisposable, IBaseRepository<TEntity> where TEntity : class
+    /// <summary>
+    /// Repositorio base generico que implementa a interface
+    /// base generica
+    /// </summary>
+    /// <typeparam name="TEntity"></typeparam>
+    public class BaseRepository<TEntity> : IDisposable, 
+        IBaseRepository<TEntity> where TEntity : class
     {
-        public void Add(TEntity obj)
+        private readonly WorldCupContext _ctx;
+
+        public BaseRepository(WorldCupContext context)
         {
-            throw new NotImplementedException();
+            _ctx = context;
+        }
+        public TEntity Add(TEntity obj)
+        {
+            _ctx.Set<TEntity>().Add(obj);
+            _ctx.SaveChanges();
+            return obj;            
         }
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            GC.SuppressFinalize(this);
         }
 
-        public IEnumerable<TEntity> GetAll(TEntity obj)
+        public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _ctx.Set<TEntity>().ToList();            
         }
 
-        public bool Remove(TEntity obj)
+        public TEntity GetById(long id)
         {
-            throw new NotImplementedException();
+            return _ctx.Set<TEntity>().Find(id);            
+        }
+
+        public bool Remove(long id)
+        {
+            var obj = _ctx.Set<TEntity>().Find(id);
+            _ctx.Set<TEntity>().Remove(obj);
+            _ctx.SaveChanges();
+            return true;
         }
 
         public bool Update(TEntity obj)
         {
-            throw new NotImplementedException();
+            _ctx.Entry<TEntity>(obj).State = EntityState.Modified;
+            _ctx.SaveChanges();
+            return true;            
         }
     }
 }

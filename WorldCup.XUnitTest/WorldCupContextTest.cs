@@ -25,7 +25,7 @@ namespace WorldCup.XUnitTest
                 /* ================== Verificacao =================== */
 
                 // Testando com Assert
-                //Assert.NotEmpty(ctx.Sellers.ToList());
+                //Assert.NotEmpty(ctx.Teams.ToList());
 
                 // Testando com FluentAssertions
                 ctx.Teams.ToList().Should().NotBeEmpty(ctx.Teams.ToList().ToString(),
