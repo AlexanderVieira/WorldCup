@@ -10,22 +10,31 @@
         public long TeamId { get; set; }
         public string Name { get; set; }
         public string Flag { get; set; }
+        public int Scoreboard { get; set; }
 
         public Team()
         {
-
         }
 
-        public Team(long teamId, string name, string flag)
+        public Team(string name, string flag)
         {
-            TeamId = teamId;
             Name = name;
             Flag = flag;
         }
 
+        public Team(long teamId, string name, string flag) : this(name, flag)
+        {
+            TeamId = teamId;
+        }
+
+        public Team(long teamId, string name, string flag, int scoreboard) : this(teamId, name, flag)
+        {                       
+            Scoreboard = scoreboard;
+        }
+
         public override string ToString()
         {
-            return $"{TeamId.ToString()} {Name} {Flag}";
+            return $"{TeamId.ToString()} {Name} {Flag} {Scoreboard}";
         }
     }
 }

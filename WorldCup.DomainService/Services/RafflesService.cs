@@ -2,59 +2,42 @@
 using System.Collections.Generic;
 using System.Linq;
 using WorldCup.Domain.Entities;
+using WorldCup.Domain.Interfaces.Repositories;
 using WorldCup.DomainService.Interfaces;
 
 namespace WorldCup.DomainService.Services
 {
     public class RafflesService : IRafflesService
-    {
-        private readonly ITeamService _teamService;
+    {   
+        private readonly ITeamRepository _teamRepository;
 
-        public RafflesService(ITeamService teamService)
+        public RafflesService(ITeamRepository teamRepository)
         {
-            _teamService = teamService;
-        }
+            _teamRepository = teamRepository;
+        }        
 
         public Dictionary<string, List<Team>> RafflesOctavesFinal()
         {
-            _teamService.Add(new Team(1, "Brasil", "BRA"));
-            _teamService.Add(new Team(2, "Argentina", "ARG"));
-            _teamService.Add(new Team(3, "Uruguai", "URU"));
-            _teamService.Add(new Team(4, "Colombia", "COL"));
-            _teamService.Add(new Team(5, "Paraguai", "PAR"));
-            _teamService.Add(new Team(6, "Alemanha", "ALE"));
-            _teamService.Add(new Team(7, "Holanda", "HOL"));
-            _teamService.Add(new Team(8, "Espanha", "ESP"));
-            _teamService.Add(new Team(9, "Inglaterra", "ING"));
-            _teamService.Add(new Team(10, "Belgica", "BEL"));
-            _teamService.Add(new Team(11, "Croacia", "CRO"));
-            _teamService.Add(new Team(12, "Italia", "ITA"));
-            _teamService.Add(new Team(13, "Marrocos", "MAR"));
-            _teamService.Add(new Team(14, "Nigeria", "NIG"));
-            _teamService.Add(new Team(15, "Mexico", "Mex"));
-            _teamService.Add(new Team(16, "Costa Rica", "COS"));
+            var rnd = new Random();
 
-            var selections = _teamService.GetAll().ToList();
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+            _teamRepository.Add(new Team("Paraguai", "PAR"));
+            _teamRepository.Add(new Team("Alemanha", "ALE"));
+            _teamRepository.Add(new Team("Holanda", "HOL"));
+            _teamRepository.Add(new Team("Espanha", "ESP"));
+            _teamRepository.Add(new Team("Inglaterra", "ING"));
+            _teamRepository.Add(new Team("Belgica", "BEL"));
+            _teamRepository.Add(new Team("Croacia", "CRO"));
+            _teamRepository.Add(new Team("Italia", "ITA"));
+            _teamRepository.Add(new Team("Marrocos", "MAR"));
+            _teamRepository.Add(new Team("Nigeria", "NIG"));
+            _teamRepository.Add(new Team("Mexico", "Mex"));
+            _teamRepository.Add(new Team("Costa Rica", "COS"));
 
-            //var selections = new List<Team>
-            //{
-            //    new Team(1, "Brasil", "BRA"),
-            //    new Team(2, "Argentina", "ARG"),
-            //    new Team(3, "Uruguai", "URU"),
-            //    new Team(4, "Colombia", "COL"),
-            //    new Team(5, "Paraguai", "PAR"),
-            //    new Team(6, "Alemanha", "ALE"),
-            //    new Team(7, "Holanda", "HOL"),
-            //    new Team(8, "Espanha", "ESP"),
-            //    new Team(9, "Inglaterra", "ING"),
-            //    new Team(10, "Belgica", "BEL"),
-            //    new Team(11, "Croacia", "CRO"),
-            //    new Team(12, "Italia", "ITA"),
-            //    new Team(13, "Marrocos", "MAR"),
-            //    new Team(14, "Nigeria", "NIG"),
-            //    new Team(15, "Mexico", "Mex"),
-            //    new Team(16, "Costa Rica", "COS")
-            //};
+            var selections = _teamRepository.GetAll().ToList();
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
@@ -63,9 +46,7 @@ namespace WorldCup.DomainService.Services
             var key_5 = new List<Team>();
             var key_6 = new List<Team>();
             var key_7 = new List<Team>();
-            var key_8 = new List<Team>();
-
-            var rnd = new Random();
+            var key_8 = new List<Team>();            
 
             for (int i = 0; i < 2; i++)
             {
@@ -123,14 +104,14 @@ namespace WorldCup.DomainService.Services
 
             var rafflesOctavesFinal = new Dictionary<string, List<Team>>
             {
-                { "Chave:1", key_1 },
-                { "Chave:2", key_2 },
-                { "Chave:3", key_3 },
-                { "Chave:4", key_4 },
-                { "Chave:5", key_5 },
-                { "Chave:6", key_6 },
-                { "Chave:7", key_7 },
-                { "Chave:8", key_8 }
+                { "Key:1", key_1 },
+                { "Key:2", key_2 },
+                { "Key:3", key_3 },
+                { "Key:4", key_4 },
+                { "Key:5", key_5 },
+                { "Key:6", key_6 },
+                { "Key:7", key_7 },
+                { "Key:8", key_8 }
             };
 
             return rafflesOctavesFinal;
@@ -138,7 +119,54 @@ namespace WorldCup.DomainService.Services
 
         public Dictionary<string, List<Team>> RafflesQuarterFinal()
         {
-            throw new NotImplementedException();
+            var rnd = new Random();
+            var selections = new List<Team>();
+
+            var key_9 = new List<Team>();
+            var key_10 = new List<Team>();
+            var key_11 = new List<Team>();
+            var key_12 = new List<Team>();
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (key_9.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count);
+                    key_9.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+
+                }
+                if (key_10.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count);
+                    key_10.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+                }
+                if (key_11.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count);
+                    key_11.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+                }
+                if (key_12.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count);
+                    key_12.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+                }
+
+            }
+
+            var rafflesQuarterFinal = new Dictionary<string, List<Team>>
+            {
+                { "Key:9", key_9 },
+                { "Key:10", key_10 },
+                { "Key:11", key_11 },
+                { "Key:12", key_12 }
+            };
+
+            return rafflesQuarterFinal;
+            
         }
 
         public Dictionary<string, List<Team>> RafflesSemiFinal()

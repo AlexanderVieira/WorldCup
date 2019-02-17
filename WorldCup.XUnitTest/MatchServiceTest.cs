@@ -1,31 +1,30 @@
-﻿using Xunit;
-using FluentAssertions;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using WorldCup.DomainService.Interfaces;
 using WorldCup.DomainService.Services;
-using WorldCup.Infra.InMemory.Repositories;
-using Microsoft.EntityFrameworkCore;
 using WorldCup.Infra.InMemory.Context;
-using System;
+using WorldCup.Infra.InMemory.Repositories;
+using Xunit;
 
 namespace WorldCup.XUnitTest
 {
-    public class RafflesServiceTest : IDisposable
-    { 
+    public class MatchServiceTest : IDisposable
+    {
         [Fact]
         public void TestAddTeams()
         {
             /* ================== Montando Cenario =================== */
-
-            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+            
+            IMatchService matchService = new MatchService(new RafflesService(GetInMemoryTeamRepository()));
 
             /* ================== Execucao =================== */
-            var dict = rafflesService.RafflesOctavesFinal();
+            var list = matchService.PlayOctavesFinal();
 
             /* ================== Verificacao =================== */
 
             // Testando com Assert
-            Assert.True(dict.ContainsKey("Key:1"));
-            Assert.Equal(8, dict.Count);
+            Assert.NotEmpty(list);
+            Assert.Equal(8, list.Count);
 
             // Testando com FluentAssertions
             //dict.Should().ContainKey("Key:1",
@@ -44,7 +43,6 @@ namespace WorldCup.XUnitTest
             worldCupContext.Database.EnsureCreated();
             return new TeamRepository(worldCupContext);
         }
-
         public void Dispose()
         {
             GC.SuppressFinalize(GetInMemoryTeamRepository());
