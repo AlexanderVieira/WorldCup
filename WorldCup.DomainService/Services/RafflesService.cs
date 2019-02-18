@@ -9,7 +9,7 @@ namespace WorldCup.DomainService.Services
 {
     public class RafflesService : IRafflesService
     {   
-        private readonly ITeamRepository _teamRepository;
+        private readonly ITeamRepository _teamRepository;         
 
         public RafflesService(ITeamRepository teamRepository)
         {
@@ -52,50 +52,50 @@ namespace WorldCup.DomainService.Services
             {
                 if (key_1.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_1.Add(selections[selected]);
                     selections.RemoveAt(selected);
 
                 }
                 if (key_2.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_2.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_3.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_3.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_4.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_4.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_5.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_5.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_6.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_6.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_7.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_7.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
                 if (key_8.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
+                    var selected = rnd.Next(0, selections.Count());
                     key_8.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
@@ -120,38 +120,38 @@ namespace WorldCup.DomainService.Services
         public Dictionary<string, List<Team>> RafflesQuarterFinal()
         {
             var rnd = new Random();
-            var selections = new List<Team>();
+            var selections = _teamRepository.GetAll().ToList();
 
-            var key_9 = new List<Team>();
-            var key_10 = new List<Team>();
-            var key_11 = new List<Team>();
-            var key_12 = new List<Team>();
+            var key_1 = new List<Team>();
+            var key_2 = new List<Team>();
+            var key_3 = new List<Team>();
+            var key_4 = new List<Team>();
 
             for (int i = 0; i < 2; i++)
             {
-                if (key_9.Count < 2)
+                if (key_1.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
-                    key_9.Add(selections[selected]);
+                    var selected = rnd.Next(0, selections.Count());
+                    key_1.Add(selections[selected]);
                     selections.RemoveAt(selected);
 
                 }
-                if (key_10.Count < 2)
+                if (key_2.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
-                    key_10.Add(selections[selected]);
+                    var selected = rnd.Next(0, selections.Count());
+                    key_2.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
-                if (key_11.Count < 2)
+                if (key_3.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
-                    key_11.Add(selections[selected]);
+                    var selected = rnd.Next(0, selections.Count());
+                    key_3.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
-                if (key_12.Count < 2)
+                if (key_4.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count);
-                    key_12.Add(selections[selected]);
+                    var selected = rnd.Next(0, selections.Count());
+                    key_4.Add(selections[selected]);
                     selections.RemoveAt(selected);
                 }
 
@@ -159,10 +159,10 @@ namespace WorldCup.DomainService.Services
 
             var rafflesQuarterFinal = new Dictionary<string, List<Team>>
             {
-                { "Key:9", key_9 },
-                { "Key:10", key_10 },
-                { "Key:11", key_11 },
-                { "Key:12", key_12 }
+                { "Key:1", key_1 },
+                { "Key:2", key_2 },
+                { "Key:3", key_3 },
+                { "Key:4", key_4 }
             };
 
             return rafflesQuarterFinal;
@@ -171,7 +171,37 @@ namespace WorldCup.DomainService.Services
 
         public Dictionary<string, List<Team>> RafflesSemiFinal()
         {
-            throw new NotImplementedException();
+            var rnd = new Random();
+            var selections = _teamRepository.GetAll().ToList();
+
+            var key_1 = new List<Team>();
+            var key_2 = new List<Team>();            
+
+            for (int i = 0; i < 2; i++)
+            {
+                if (key_1.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count());
+                    key_1.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+
+                }
+                if (key_2.Count < 2)
+                {
+                    var selected = rnd.Next(0, selections.Count());
+                    key_2.Add(selections[selected]);
+                    selections.RemoveAt(selected);
+                }                
+
+            }
+
+            var rafflesSemiFinal = new Dictionary<string, List<Team>>
+            {
+                { "Key:1", key_1 },
+                { "Key:2", key_2 }                
+            };
+
+            return rafflesSemiFinal;
         }
     }
 }

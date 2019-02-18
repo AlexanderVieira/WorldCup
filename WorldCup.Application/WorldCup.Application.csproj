@@ -4,4 +4,9 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\WorldCup.DomainService\WorldCup.DomainService.csproj" />
+    <ProjectReference Include="..\WorldCup.Domain\WorldCup.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

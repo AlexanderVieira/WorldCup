@@ -34,7 +34,7 @@
 
         public override string ToString()
         {
-            return $"{TeamId.ToString()} {Name} {Flag} {Scoreboard}";
+            return $"{Name} {Flag}";
         }
     }
 }

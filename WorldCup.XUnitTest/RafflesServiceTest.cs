@@ -12,7 +12,7 @@ namespace WorldCup.XUnitTest
     public class RafflesServiceTest : IDisposable
     { 
         [Fact]
-        public void TestAddTeams()
+        public void TestDictRafflesOctavesTeams()
         {
             /* ================== Montando Cenario =================== */
 
