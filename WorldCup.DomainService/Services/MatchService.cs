@@ -9,6 +9,11 @@ namespace WorldCup.DomainService.Services
     {
         private readonly IRafflesService _rafflesService;
 
+        public MatchService()
+        {
+
+        }
+
         public MatchService(IRafflesService rafflesService)
         {
             _rafflesService = rafflesService;

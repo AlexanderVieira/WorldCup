@@ -12,7 +12,7 @@ namespace WorldCup.XUnitTest
     public class RafflesServiceTest : IDisposable
     { 
         [Fact]
-        public void TestDictRafflesOctavesTeams()
+        public void TestRafflesOctavesFinal()
         {
             /* ================== Montando Cenario =================== */
 
@@ -26,6 +26,52 @@ namespace WorldCup.XUnitTest
             // Testando com Assert
             Assert.True(dict.ContainsKey("Key:1"));
             Assert.Equal(8, dict.Count);
+
+            // Testando com FluentAssertions
+            //dict.Should().ContainKey("Key:1",
+            //    $"O objeto esperado não corresponde com ao objeto obtido" +
+            //    $" ({dict.ContainsKey("Key:1").ToString()})");
+
+        }
+
+        [Fact]
+        public void TestRafflesQuarterFinal()
+        {
+            /* ================== Montando Cenario =================== */
+
+            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+
+            /* ================== Execucao =================== */
+            var dict = rafflesService.RafflesQuarterFinal();
+
+            /* ================== Verificacao =================== */
+
+            // Testando com Assert
+            Assert.True(dict.ContainsKey("Key:1"));
+            Assert.Equal(4, dict.Count);
+
+            // Testando com FluentAssertions
+            //dict.Should().ContainKey("Key:1",
+            //    $"O objeto esperado não corresponde com ao objeto obtido" +
+            //    $" ({dict.ContainsKey("Key:1").ToString()})");
+
+        }
+
+        [Fact]
+        public void TestRafflesSemiFinal()
+        {
+            /* ================== Montando Cenario =================== */
+
+            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+
+            /* ================== Execucao =================== */
+            var dict = rafflesService.RafflesSemiFinal();
+
+            /* ================== Verificacao =================== */
+
+            // Testando com Assert
+            Assert.True(dict.ContainsKey("Key:1"));
+            Assert.Equal(2, dict.Count);
 
             // Testando com FluentAssertions
             //dict.Should().ContainKey("Key:1",

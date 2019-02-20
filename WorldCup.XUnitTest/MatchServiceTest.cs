@@ -80,6 +80,28 @@ namespace WorldCup.XUnitTest
 
         }
 
+        [Fact]
+        public void TestPlayFinal()
+        {
+            /* ================== Montando Cenario =================== */
+
+            IMatchService matchService = new MatchService(new RafflesService(GetInMemoryTeamRepository()));
+
+            /* ================== Execucao =================== */
+            var championTeam = matchService.PlayFinal();
+
+            /* ================== Verificacao =================== */
+
+            // Testando com Assert
+            Assert.NotNull(championTeam.Name);
+
+            // Testando com FluentAssertions
+            //championTeam.Should().NotBeNull(championTeam.Name,
+            //    $"O objeto esperado não corresponde com ao objeto obtido" +
+            //    $" ({championTeam.Name})");
+
+        }
+
         private TeamRepository GetInMemoryTeamRepository()
         {
             DbContextOptions<WorldCupContext> options;

@@ -9,7 +9,8 @@ namespace WorldCup.DomainService.Services
 {
     public class RafflesService : IRafflesService
     {   
-        private readonly ITeamRepository _teamRepository;         
+        private readonly ITeamRepository _teamRepository;
+        public List<Team> selections;
 
         public RafflesService(ITeamRepository teamRepository)
         {
@@ -37,7 +38,7 @@ namespace WorldCup.DomainService.Services
             _teamRepository.Add(new Team("Mexico", "Mex"));
             _teamRepository.Add(new Team("Costa Rica", "COS"));
 
-            var selections = _teamRepository.GetAll().ToList();
+            selections = _teamRepository.GetAll().ToList();          
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
@@ -51,53 +52,62 @@ namespace WorldCup.DomainService.Services
             for (int i = 0; i < 2; i++)
             {
                 if (key_1.Count < 2)
-                {
+                {                    
                     var selected = rnd.Next(0, selections.Count());
                     key_1.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    //selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_2.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_3.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_3.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_4.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_4.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_5.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_5.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_6.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_6.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_7.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_7.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_8.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_8.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
 
             }
@@ -120,6 +130,16 @@ namespace WorldCup.DomainService.Services
         public Dictionary<string, List<Team>> RafflesQuarterFinal()
         {
             var rnd = new Random();
+
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+            _teamRepository.Add(new Team("Paraguai", "PAR"));
+            _teamRepository.Add(new Team("Alemanha", "ALE"));
+            _teamRepository.Add(new Team("Holanda", "HOL"));
+            _teamRepository.Add(new Team("Espanha", "ESP"));
+
             var selections = _teamRepository.GetAll().ToList();
 
             var key_1 = new List<Team>();
@@ -133,26 +153,30 @@ namespace WorldCup.DomainService.Services
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_1.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_2.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_3.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_3.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_4.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_4.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }
 
             }
@@ -172,6 +196,12 @@ namespace WorldCup.DomainService.Services
         public Dictionary<string, List<Team>> RafflesSemiFinal()
         {
             var rnd = new Random();
+
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+
             var selections = _teamRepository.GetAll().ToList();
 
             var key_1 = new List<Team>();
@@ -183,14 +213,16 @@ namespace WorldCup.DomainService.Services
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_1.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
                     var selected = rnd.Next(0, selections.Count());
                     key_2.Add(selections[selected]);
-                    selections.RemoveAt(selected);
+                    _teamRepository.Remove(selections[selected].TeamId);
+                    selections = _teamRepository.GetAll().ToList();
                 }                
 
             }
