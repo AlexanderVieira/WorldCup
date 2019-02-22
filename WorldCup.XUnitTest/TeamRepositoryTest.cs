@@ -49,7 +49,7 @@ namespace WorldCup.XUnitTest
             
         }        
 
-        private TeamRepository GetInMemoryTeamRepository()
+        private ITeamRepository GetInMemoryTeamRepository()
         {
             DbContextOptions<WorldCupContext> options;
             var builder = new DbContextOptionsBuilder<WorldCupContext>();

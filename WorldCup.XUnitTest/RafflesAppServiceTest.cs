@@ -1,26 +1,27 @@
-﻿using Xunit;
-using FluentAssertions;
-using WorldCup.DomainService.Interfaces;
-using WorldCup.DomainService.Services;
-using WorldCup.Infra.InMemory.Repositories;
-using Microsoft.EntityFrameworkCore;
-using WorldCup.Infra.InMemory.Context;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
+using WorldCup.Application;
+using WorldCup.Application.Interfaces;
 using WorldCup.Domain.Interfaces.Repositories;
+using WorldCup.DomainService.Services;
+using WorldCup.Infra.InMemory.Context;
+using WorldCup.Infra.InMemory.Repositories;
+using Xunit;
+using FluentAssertions;
 
 namespace WorldCup.XUnitTest
 {
-    public class RafflesServiceTest : IDisposable
-    { 
+    public class RafflesAppServiceTest : IDisposable
+    {
         [Fact]
-        public void TestRafflesOctavesFinal()
+        public void TestRafflesAppServiceOctavesFinal()
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
 
             /* ================== Execucao =================== */
-            var dict = rafflesService.RafflesOctavesFinal();
+            var dict = rafflesAppService.RafflesOctavesFinal();
 
             /* ================== Verificacao =================== */
 
@@ -36,14 +37,14 @@ namespace WorldCup.XUnitTest
         }
 
         [Fact]
-        public void TestRafflesQuarterFinal()
+        public void TestRafflesAppServiceQuarterFinal()
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
 
             /* ================== Execucao =================== */
-            var dict = rafflesService.RafflesQuarterFinal();
+            var dict = rafflesAppService.RafflesQuarterFinal();
 
             /* ================== Verificacao =================== */
 
@@ -59,14 +60,14 @@ namespace WorldCup.XUnitTest
         }
 
         [Fact]
-        public void TestRafflesSemiFinal()
+        public void TestRafflesAppServiceSemiFinal()
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesService rafflesService = new RafflesService(GetInMemoryTeamRepository());
+            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
 
             /* ================== Execucao =================== */
-            var dict = rafflesService.RafflesSemiFinal();
+            var dict = rafflesAppService.RafflesSemiFinal();
 
             /* ================== Verificacao =================== */
 

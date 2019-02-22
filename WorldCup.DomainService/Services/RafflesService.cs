@@ -10,11 +10,12 @@ namespace WorldCup.DomainService.Services
     public class RafflesService : IRafflesService
     {   
         private readonly ITeamRepository _teamRepository;
-        public List<Team> selections;
+        public List<Team> _selections;
 
         public RafflesService(ITeamRepository teamRepository)
         {
             _teamRepository = teamRepository;
+            _selections = new List<Team>();
         }        
 
         public Dictionary<string, List<Team>> RafflesOctavesFinal()
@@ -38,7 +39,7 @@ namespace WorldCup.DomainService.Services
             _teamRepository.Add(new Team("Mexico", "Mex"));
             _teamRepository.Add(new Team("Costa Rica", "COS"));
 
-            selections = _teamRepository.GetAll().ToList();          
+            _selections = _teamRepository.GetAll().ToList();          
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
@@ -53,61 +54,61 @@ namespace WorldCup.DomainService.Services
             {
                 if (key_1.Count < 2)
                 {                    
-                    var selected = rnd.Next(0, selections.Count());
-                    key_1.Add(selections[selected]);
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_1.Add(_selections[selected]);
                     //selections.RemoveAt(selected);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_2.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_2.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_3.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_3.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_3.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_4.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_4.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_4.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_5.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_5.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_5.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_6.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_6.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_6.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_7.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_7.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_7.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_8.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_8.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_8.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
 
             }
@@ -140,7 +141,7 @@ namespace WorldCup.DomainService.Services
             _teamRepository.Add(new Team("Holanda", "HOL"));
             _teamRepository.Add(new Team("Espanha", "ESP"));
 
-            var selections = _teamRepository.GetAll().ToList();
+            var _selections = _teamRepository.GetAll().ToList();
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
@@ -151,32 +152,32 @@ namespace WorldCup.DomainService.Services
             {
                 if (key_1.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_1.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_1.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_2.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_2.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_3.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_3.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_3.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
                 if (key_4.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_4.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_4.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }
 
             }
@@ -202,7 +203,7 @@ namespace WorldCup.DomainService.Services
             _teamRepository.Add(new Team("Uruguai", "URU"));
             _teamRepository.Add(new Team("Colombia", "COL"));
 
-            var selections = _teamRepository.GetAll().ToList();
+            var _selections = _teamRepository.GetAll().ToList();
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();            
@@ -211,18 +212,18 @@ namespace WorldCup.DomainService.Services
             {
                 if (key_1.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_1.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_1.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
 
                 }
                 if (key_2.Count < 2)
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_2.Add(selections[selected]);
-                    _teamRepository.Remove(selections[selected].TeamId);
-                    selections = _teamRepository.GetAll().ToList();
+                    var selected = rnd.Next(0, _selections.Count());
+                    key_2.Add(_selections[selected]);
+                    _teamRepository.Remove(_selections[selected].TeamId);
+                    _selections = _teamRepository.GetAll().ToList();
                 }                
 
             }

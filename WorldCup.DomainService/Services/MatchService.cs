@@ -8,30 +8,32 @@ namespace WorldCup.DomainService.Services
     public class MatchService : IMatchService        
     {
         private readonly IRafflesService _rafflesService;
+        private List<Team> _selections;
 
         public MatchService()
         {
-
+            _selections = new List<Team>();
         }
 
         public MatchService(IRafflesService rafflesService)
         {
             _rafflesService = rafflesService;
+            _selections = new List<Team>();
         }
 
         public Team PlayFinal()
         {            
-            var list = PlaySemiFinal();
+            var _selections = PlaySemiFinal();
             var rnd = new Random();
             
             while (true)
             {
                 var teamA = new Team();
                 var teamB = new Team();
-                teamA.Name = list[0].Name;
+                teamA.Name = _selections[0].Name;
                 teamA.Scoreboard = rnd.Next(0, 6);
 
-                teamB.Name = list[1].Name;
+                teamB.Name = _selections[1].Name;
                 teamB.Scoreboard = rnd.Next(0, 6);
 
                 if (teamA.Scoreboard > teamB.Scoreboard)
@@ -52,7 +54,7 @@ namespace WorldCup.DomainService.Services
 
         public List<Team> PlayOctavesFinal()
         {
-            var selections = new List<Team>();
+            //var _selections = new List<Team>();
             var dictOctavesFinal = _rafflesService.RafflesOctavesFinal();
             var rnd = new Random();
 
@@ -76,13 +78,13 @@ namespace WorldCup.DomainService.Services
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        selections.Add(teamA);
+                        _selections.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        selections.Add(teamB);
+                        _selections.Add(teamB);
                         i++;
                     }
                     else
@@ -91,12 +93,12 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return selections;
+            return _selections;
         }
 
         public List<Team> PlayQuarterFinal()
         {
-            var selections = new List<Team>();
+            //var _selections = new List<Team>();
             var dicQuarterFinal = _rafflesService.RafflesQuarterFinal();
             var rnd = new Random();
 
@@ -120,13 +122,13 @@ namespace WorldCup.DomainService.Services
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
                         dicQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        selections.Add(teamA);
+                        _selections.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dicQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        selections.Add(teamB);
+                        _selections.Add(teamB);
                         i++;
                     }
                     else
@@ -135,12 +137,12 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return selections;
+            return _selections;
         }
 
         public List<Team> PlaySemiFinal()
         {
-            var selections = new List<Team>();
+            //var _selections = new List<Team>();
             var dicSemiFinal = _rafflesService.RafflesSemiFinal();
             var rnd = new Random();
 
@@ -164,13 +166,13 @@ namespace WorldCup.DomainService.Services
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
                         dicSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        selections.Add(teamA);
+                        _selections.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dicSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        selections.Add(teamB);
+                        _selections.Add(teamB);
                         i++;
                     }
                     else
@@ -179,7 +181,7 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return selections;
+            return _selections;
         }
     }
 }

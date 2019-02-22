@@ -9,7 +9,7 @@ namespace WorldCup.Application
     {
         private readonly IBaseService<TEntity> _baseService;
 
-        public BaseAppService(DomainService.Interfaces.IBaseService<TEntity> baseService)
+        public BaseAppService(IBaseService<TEntity> baseService)
         {
             _baseService = baseService;
         }
