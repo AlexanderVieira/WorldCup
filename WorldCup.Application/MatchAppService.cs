@@ -16,24 +16,24 @@ namespace WorldCup.Application
             _matchService = matchService;
         }
 
-        public Team PlayFinal()
+        public List<Team> PlayOctavesFinal(Dictionary<string, List<Team>> dictOctavesFinal)
         {
-            return _matchService.PlayFinal();
+            return _matchService.PlayOctavesFinal(dictOctavesFinal);
         }
 
-        public List<Team> PlayOctavesFinal()
+        public List<Team> PlayQuarterFinal(Dictionary<string, List<Team>> dictQuarterFinal)
         {
-            return _matchService.PlayOctavesFinal();
+            return _matchService.PlayQuarterFinal(dictQuarterFinal);
         }
 
-        public List<Team> PlayQuarterFinal()
+        public List<Team> PlaySemiFinal(Dictionary<string, List<Team>> dictSemiFinal)
         {
-            return _matchService.PlayQuarterFinal();
+            return _matchService.PlaySemiFinal(dictSemiFinal);
         }
 
-        public List<Team> PlaySemiFinal()
+        public Team PlayFinal(List<Team> finals)
         {
-            return _matchService.PlaySemiFinal();
+            return _matchService.PlayFinal(finals);
         }
     }
 }

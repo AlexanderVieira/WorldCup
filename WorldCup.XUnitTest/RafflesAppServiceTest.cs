@@ -8,20 +8,48 @@ using WorldCup.Infra.InMemory.Context;
 using WorldCup.Infra.InMemory.Repositories;
 using Xunit;
 using FluentAssertions;
+using WorldCup.Domain.Entities;
+using System.Linq;
 
 namespace WorldCup.XUnitTest
 {
     public class RafflesAppServiceTest : IDisposable
     {
+        private IRafflesAppService _rafflesAppService;
+        private ITeamRepository _teamRepository;
+
+        public RafflesAppServiceTest()
+        {
+            _rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
+            _teamRepository = GetInMemoryTeamRepository();
+        }
         [Fact]
         public void TestRafflesAppServiceOctavesFinal()
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+            _teamRepository.Add(new Team("Paraguai", "PAR"));
+            _teamRepository.Add(new Team("Alemanha", "ALE"));
+            _teamRepository.Add(new Team("Holanda", "HOL"));
+            _teamRepository.Add(new Team("Espanha", "ESP"));
+            _teamRepository.Add(new Team("Inglaterra", "ING"));
+            _teamRepository.Add(new Team("Belgica", "BEL"));
+            _teamRepository.Add(new Team("Croacia", "CRO"));
+            _teamRepository.Add(new Team("Italia", "ITA"));
+            _teamRepository.Add(new Team("Marrocos", "MAR"));
+            _teamRepository.Add(new Team("Nigeria", "NIG"));
+            _teamRepository.Add(new Team("Mexico", "Mex"));
+            _teamRepository.Add(new Team("Costa Rica", "COS"));
+
+            var selections = _teamRepository.GetAll().ToList();
+
 
             /* ================== Execucao =================== */
-            var dict = rafflesAppService.RafflesOctavesFinal();
+            var dict = _rafflesAppService.RafflesOctavesFinal(selections);
 
             /* ================== Verificacao =================== */
 
@@ -41,10 +69,19 @@ namespace WorldCup.XUnitTest
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+            _teamRepository.Add(new Team("Paraguai", "PAR"));
+            _teamRepository.Add(new Team("Alemanha", "ALE"));
+            _teamRepository.Add(new Team("Holanda", "HOL"));
+            _teamRepository.Add(new Team("Espanha", "ESP"));
+
+            var selections = _teamRepository.GetAll().ToList();
 
             /* ================== Execucao =================== */
-            var dict = rafflesAppService.RafflesQuarterFinal();
+            var dict = _rafflesAppService.RafflesQuarterFinal(selections);
 
             /* ================== Verificacao =================== */
 
@@ -64,10 +101,15 @@ namespace WorldCup.XUnitTest
         {
             /* ================== Montando Cenario =================== */
 
-            IRafflesAppService rafflesAppService = new RafflesAppService(new RafflesService(GetInMemoryTeamRepository()));
+            _teamRepository.Add(new Team("Brasil", "BRA"));
+            _teamRepository.Add(new Team("Argentina", "ARG"));
+            _teamRepository.Add(new Team("Uruguai", "URU"));
+            _teamRepository.Add(new Team("Colombia", "COL"));
+
+            var selections = _teamRepository.GetAll().ToList();
 
             /* ================== Execucao =================== */
-            var dict = rafflesAppService.RafflesSemiFinal();
+            var dict = _rafflesAppService.RafflesSemiFinal(selections);
 
             /* ================== Verificacao =================== */
 

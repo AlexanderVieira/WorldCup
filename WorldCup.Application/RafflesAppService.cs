@@ -15,19 +15,19 @@ namespace WorldCup.Application
             _rafflesService = rafflesService;
         }
 
-        public Dictionary<string, List<Team>> RafflesOctavesFinal()
+        public Dictionary<string, List<Team>> RafflesOctavesFinal(List<Team> selections)
         {
-            return _rafflesService.RafflesOctavesFinal();
+            return _rafflesService.RafflesOctavesFinal(selections);
         }
 
-        public Dictionary<string, List<Team>> RafflesQuarterFinal()
+        public Dictionary<string, List<Team>> RafflesQuarterFinal(List<Team> selections)
         {
-            return _rafflesService.RafflesQuarterFinal();
+            return _rafflesService.RafflesQuarterFinal(selections);
         }
 
-        public Dictionary<string, List<Team>> RafflesSemiFinal()
+        public Dictionary<string, List<Team>> RafflesSemiFinal(List<Team> selections)
         {
-            return _rafflesService.RafflesSemiFinal();
+            return _rafflesService.RafflesSemiFinal(selections);
         }
     }
 }

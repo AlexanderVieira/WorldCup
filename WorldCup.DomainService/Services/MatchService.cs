@@ -1,61 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using WorldCup.Domain.Entities;
+using WorldCup.Domain.Interfaces.Repositories;
 using WorldCup.DomainService.Interfaces;
 
 namespace WorldCup.DomainService.Services
 {    
     public class MatchService : IMatchService        
     {
-        private readonly IRafflesService _rafflesService;
-        private List<Team> _selections;
-
-        public MatchService()
+        private readonly ITeamRepository _teamRepository;
+        private List<Team> _selections;        
+        
+        public MatchService(ITeamRepository teamRepository)
         {
-            _selections = new List<Team>();
-        }
+            _teamRepository = teamRepository;                     
+        }        
 
-        public MatchService(IRafflesService rafflesService)
-        {
-            _rafflesService = rafflesService;
-            _selections = new List<Team>();
-        }
-
-        public Team PlayFinal()
-        {            
-            var _selections = PlaySemiFinal();
-            var rnd = new Random();
-            
-            while (true)
-            {
-                var teamA = new Team();
-                var teamB = new Team();
-                teamA.Name = _selections[0].Name;
-                teamA.Scoreboard = rnd.Next(0, 6);
-
-                teamB.Name = _selections[1].Name;
-                teamB.Scoreboard = rnd.Next(0, 6);
-
-                if (teamA.Scoreboard > teamB.Scoreboard)
-                {                    
-                    return teamA;                    
-                }
-                else if (teamA.Scoreboard < teamB.Scoreboard)
-                {
-                    return teamB;                   
-                }
-                else
-                {
-                    continue;
-                }
-            }
-
-        }
-
-        public List<Team> PlayOctavesFinal()
+        public List<Team> PlayOctavesFinal(Dictionary<string, List<Team>> dictOctavesFinal)
         {
             //var _selections = new List<Team>();
-            var dictOctavesFinal = _rafflesService.RafflesOctavesFinal();
+            //var dictOctavesFinal = keyValues;
             var rnd = new Random();
 
 
@@ -78,13 +43,13 @@ namespace WorldCup.DomainService.Services
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        _selections.Add(teamA);
+                        _teamRepository.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        _selections.Add(teamB);
+                        _teamRepository.Add(teamB);
                         i++;
                     }
                     else
@@ -93,15 +58,12 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections;
+            return _selections = _teamRepository.GetAll().ToList();
         }
 
-        public List<Team> PlayQuarterFinal()
-        {
-            //var _selections = new List<Team>();
-            var dicQuarterFinal = _rafflesService.RafflesQuarterFinal();
+        public List<Team> PlayQuarterFinal(Dictionary<string, List<Team>> dictQuarterFinal)
+        {            
             var rnd = new Random();
-
 
             for (int i = 0; i < 4; i++)
             {
@@ -113,22 +75,22 @@ namespace WorldCup.DomainService.Services
                     }
                     var teamA = new Team();
                     var teamB = new Team();
-                    teamA.Name = dicQuarterFinal["Key:" + (i + 1).ToString()][0].ToString();
+                    teamA.Name = dictQuarterFinal["Key:" + (i + 1).ToString()][0].ToString();
                     teamA.Scoreboard = rnd.Next(0, 6);
 
-                    teamB.Name = dicQuarterFinal["Key:" + (i + 1).ToString()][1].ToString();
+                    teamB.Name = dictQuarterFinal["Key:" + (i + 1).ToString()][1].ToString();
                     teamB.Scoreboard = rnd.Next(0, 6);
 
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
-                        dicQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        _selections.Add(teamA);
+                        dictQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
+                        _teamRepository.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
-                        dicQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        _selections.Add(teamB);
+                        dictQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
+                        _teamRepository.Add(teamB);
                         i++;
                     }
                     else
@@ -137,15 +99,12 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections;
+            return _selections = _teamRepository.GetAll().ToList();
         }
 
-        public List<Team> PlaySemiFinal()
-        {
-            //var _selections = new List<Team>();
-            var dicSemiFinal = _rafflesService.RafflesSemiFinal();
+        public List<Team> PlaySemiFinal(Dictionary<string, List<Team>> dictSemiFinal)
+        {            
             var rnd = new Random();
-
 
             for (int i = 0; i < 2; i++)
             {
@@ -157,22 +116,22 @@ namespace WorldCup.DomainService.Services
                     }
                     var teamA = new Team();
                     var teamB = new Team();
-                    teamA.Name = dicSemiFinal["Key:" + (i + 1).ToString()][0].ToString();
+                    teamA.Name = dictSemiFinal["Key:" + (i + 1).ToString()][0].ToString();
                     teamA.Scoreboard = rnd.Next(0, 6);
 
-                    teamB.Name = dicSemiFinal["Key:" + (i + 1).ToString()][1].ToString();
+                    teamB.Name = dictSemiFinal["Key:" + (i + 1).ToString()][1].ToString();
                     teamB.Scoreboard = rnd.Next(0, 6);
 
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
-                        dicSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
-                        _selections.Add(teamA);
+                        dictSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
+                        _teamRepository.Add(teamA);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
-                        dicSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
-                        _selections.Add(teamB);
+                        dictSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
+                        _teamRepository.Add(teamB);
                         i++;
                     }
                     else
@@ -181,7 +140,37 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections;
+            return _selections = _teamRepository.GetAll().ToList();
+        }
+
+        public Team PlayFinal(List<Team> finals)
+        {
+            //var _selections = ;
+            var rnd = new Random();
+
+            while (true)
+            {
+                var teamA = new Team();
+                var teamB = new Team();
+                teamA.Name = finals[0].Name;
+                teamA.Scoreboard = rnd.Next(0, 6);
+
+                teamB.Name = finals[1].Name;
+                teamB.Scoreboard = rnd.Next(0, 6);
+
+                if (teamA.Scoreboard > teamB.Scoreboard)
+                {
+                    return teamA;
+                }
+                else if (teamA.Scoreboard < teamB.Scoreboard)
+                {
+                    return teamB;
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
     }
 }

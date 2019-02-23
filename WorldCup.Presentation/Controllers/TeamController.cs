@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using WorldCup.Application.Interfaces;
+using WorldCup.Domain.Entities;
 
 namespace WorldCup.Presentation.Controllers
 {
@@ -9,6 +11,10 @@ namespace WorldCup.Presentation.Controllers
         private readonly ITeamAppService _teamAppService;
         private readonly IMatchAppService _matchAppService;
         private readonly IRafflesAppService _rafflesAppService;
+
+        public TeamController()
+        {
+        }
 
         public TeamController(ITeamAppService teamAppService, 
             IMatchAppService matchAppService, IRafflesAppService rafflesAppService)
@@ -22,30 +28,48 @@ namespace WorldCup.Presentation.Controllers
         // GET: Team
         public ActionResult Index()
         {
-            //################################ OITAVAS DE FINAL ###################################
+            //################################################# OITAVAS DE FINAL ############################################
 
-            var selectionsRafflesOctavesFinals = _rafflesAppService.RafflesOctavesFinal();
-            ViewBag["selectionsRafflesOctavesFinals"] = selectionsRafflesOctavesFinals;            
-            var classifiedSelectionsForQuarterFinals = _matchAppService.PlayOctavesFinal();
+            _teamAppService.Add(new Team("Brasil", "BRA"));
+            _teamAppService.Add(new Team("Argentina", "ARG"));
+            _teamAppService.Add(new Team("Uruguai", "URU"));
+            _teamAppService.Add(new Team("Colombia", "COL"));
+            _teamAppService.Add(new Team("Paraguai", "PAR"));
+            _teamAppService.Add(new Team("Alemanha", "ALE"));
+            _teamAppService.Add(new Team("Holanda", "HOL"));
+            _teamAppService.Add(new Team("Espanha", "ESP"));
+            _teamAppService.Add(new Team("Inglaterra", "ING"));
+            _teamAppService.Add(new Team("Belgica", "BEL"));
+            _teamAppService.Add(new Team("Croacia", "CRO"));
+            _teamAppService.Add(new Team("Italia", "ITA"));
+            _teamAppService.Add(new Team("Marrocos", "MAR"));
+            _teamAppService.Add(new Team("Nigeria", "NIG"));
+            _teamAppService.Add(new Team("Mexico", "Mex"));
+            _teamAppService.Add(new Team("Costa Rica", "COS"));
 
-            //################################ QUARTAS DE FINAL ###################################
+            var selections = _teamAppService.GetAll().ToList();
+            var selectionsRafflesOctavesFinals = _rafflesAppService.RafflesOctavesFinal(selections);
+            ViewBag.selectionsRafflesOctavesFinals = selectionsRafflesOctavesFinals;            
+            var classifiedSelectionsForQuarterFinals = _matchAppService.PlayOctavesFinal(selectionsRafflesOctavesFinals);
+
+            //################################################# QUARTAS DE FINAL ##############################################
             
-            ViewBag["classifiedSelectionsForQuarterFinals"] = classifiedSelectionsForQuarterFinals;
-            var selectionsRafflesQuarterFinals = _rafflesAppService.RafflesQuarterFinal();
-            ViewBag["selectionsRafflesQuarterFinals"] = selectionsRafflesQuarterFinals;
-            var classifiedSelectionsForSemiFinal = _matchAppService.PlayQuarterFinal();
+            ViewBag.classifiedSelectionsForQuarterFinals = classifiedSelectionsForQuarterFinals;
+            var selectionsRafflesQuarterFinals = _rafflesAppService.RafflesQuarterFinal(classifiedSelectionsForQuarterFinals);
+            ViewBag.selectionsRafflesQuarterFinals = selectionsRafflesQuarterFinals;
+            var classifiedSelectionsForSemiFinal = _matchAppService.PlayQuarterFinal(selectionsRafflesQuarterFinals);
 
-            //#################################### SEMI-FINAL #####################################
+            //#################################################### SEMI-FINAL #################################################
 
-            ViewBag["classifiedSelectionsForSemiFinals"] = classifiedSelectionsForSemiFinal;
-            var selectionsRafflesSemiFinals = _rafflesAppService.RafflesSemiFinal();
-            ViewBag["selectionsRafflesSemiFinals"] = selectionsRafflesSemiFinals;
-            var classifiedSelectionsForFinal = _matchAppService.PlaySemiFinal();
+            ViewBag.classifiedSelectionsForSemiFinals = classifiedSelectionsForSemiFinal;
+            var selectionsRafflesSemiFinals = _rafflesAppService.RafflesSemiFinal(classifiedSelectionsForSemiFinal);
+            ViewBag.selectionsRafflesSemiFinals = selectionsRafflesSemiFinals;
+            var classifiedSelectionsForFinal = _matchAppService.PlaySemiFinal(selectionsRafflesSemiFinals);
 
-            //#################################### SEMI-FINAL #####################################
+            //###################################################### FINAL ####################################################
 
-            ViewBag["classifiedSelectionsForFinals"] = classifiedSelectionsForFinal;
-            var selectionChampion = _matchAppService.PlayFinal();
+            ViewBag.classifiedSelectionsForFinal = classifiedSelectionsForFinal;
+            var selectionChampion = _matchAppService.PlayFinal(classifiedSelectionsForFinal);
 
             return View();
         }

@@ -7,8 +7,8 @@ namespace WorldCup.Application.Interfaces
 {
     public interface IRafflesAppService
     {
-        Dictionary<string, List<Team>> RafflesOctavesFinal();
-        Dictionary<string, List<Team>> RafflesQuarterFinal();
-        Dictionary<string, List<Team>> RafflesSemiFinal();
+        Dictionary<string, List<Team>> RafflesOctavesFinal(List<Team> selections);
+        Dictionary<string, List<Team>> RafflesQuarterFinal(List<Team> selections);
+        Dictionary<string, List<Team>> RafflesSemiFinal(List<Team> selections);
     }
 }
