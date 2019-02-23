@@ -1,7 +1,16 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using WorldCup.Application;
+using WorldCup.Application.Interfaces;
+using WorldCup.Domain.Entities;
+using WorldCup.Domain.Interfaces.Repositories;
+using WorldCup.DomainService.Interfaces;
+using WorldCup.DomainService.Services;
+using WorldCup.Infra.InMemory.Context;
+using WorldCup.Infra.InMemory.Repositories;
 
 namespace WorldCup.Presentation
 {
@@ -17,7 +26,20 @@ namespace WorldCup.Presentation
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddDbContext<WorldCupContext>(opt => opt.UseInMemoryDatabase());
+            services.AddDbContext<WorldCupContext>(opt => opt.UseInMemoryDatabase(databaseName: "WorldCupDB"));
+            services.AddTransient<IBaseAppService<Team>, BaseAppService<Team>>();
+            services.AddTransient<ITeamAppService, TeamAppService>();
+            services.AddTransient<IRafflesAppService, RafflesAppService>();
+            services.AddTransient<IMatchAppService, MatchAppService>();
+
+            services.AddTransient<IBaseService<Team>, BaseService<Team>>();
+            services.AddTransient<ITeamService, TeamService>();
+            services.AddTransient<IRafflesService, RafflesService>();
+            services.AddTransient<IMatchService, MatchService>();
+
+            services.AddTransient<IBaseRepository<Team>, BaseRepository<Team>>();
+            services.AddTransient<ITeamRepository, TeamRepository>();            
+
             services.AddMvc();
         }
 
@@ -40,7 +62,7 @@ namespace WorldCup.Presentation
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Team}/{action=Index}/{id?}");
             });
         }
     }

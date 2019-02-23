@@ -1,0 +1,250 @@
+﻿@{
+    ViewData["Title"] = "Copa do Mundo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Copa do Mundo</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        #container {
+            position: relative;
+            width: 1040px;
+            height: 800px;
+            margin-top: 20px;
+            margin-right: auto;
+            margin-left: auto;
+            /*border: 1px solid #000;*/
+            background-color: #DEE;
+        }
+
+        header {
+            position: relative;
+            width: 100%;
+            height: 80px;
+            margin-right: auto;
+            margin-left: auto;
+            /*border: 1px solid #000;*/
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        h1 {
+            margin-top: 5px;
+        }
+
+        h2 {
+            position: relative;
+            width: 100%;            
+            margin-right: auto;
+            margin-left: auto;            
+            text-align: center;
+        }
+
+        #painel {
+            position: relative;
+            width: 1000px;
+            height: 550px;
+            margin-top: 20px;
+            margin-right: auto;
+            margin-left: auto;
+            /*border: 1px solid #000; 			*/
+        }
+
+        .oitavas {
+            position: relative;
+            float: left;
+            width: 120px;
+            height: 500px;
+            /*border: 1px solid #000;*/
+            margin-top: 20px;
+            margin-left: 20px;
+            text-align: center;
+        }
+
+        .quartas {
+            position: relative;
+            float: left;
+            width: 120px;
+            height: 250px;
+            /*border: 1px solid #000;*/
+            margin-top: 125px;
+            margin-left: 20px;
+            text-align: center;
+        }
+
+        .semi {
+            position: relative;
+            float: left;
+            width: 120px;
+            height: 200px;
+            /*border: 1px solid #000;*/
+            margin-top: 150px;
+            margin-left: 20px;
+            text-align: center;
+        }
+
+        #final {
+            position: relative;
+            float: left;
+            width: 120px;
+            height: 128px;
+            /*border: 1px solid #000;*/
+            margin-top: 200px;
+            margin-left: 20px;
+            text-align: center;
+        }
+
+        #chave-a, #chave-b, #chave-c, #chave-d, #chave-e, #chave-f, #chave-g,
+        #chave-h, #chave-i, #chave-j, #chave-k, #chave-l, #chave-m, #chave-n, #chave-o {
+            /*border: 1px solid #000;*/
+            width: 120px;
+            height: 100px;
+            margin-top: 7px;
+        }
+
+        button {
+            margin-top: 9px;
+        }
+    </style>
+</head>
+<body>
+
+    <div><h2>@ViewData["Title"]</h2></div>
+
+    <div id="container">
+        <header>
+
+            <div class="panel panel-primary">
+                <div class="panel-body panel-heading">CONFRONTOS ELIMINATÓRIOS</div>
+            </div>
+
+        </header>
+        <div id="painel">
+            <div class="oitavas">
+                <h5>OITAVAS DE FINAL</h5>
+                <div id="chave-a">
+                    <button type="button" class="btn btn-primary">Time A</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time B</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+                <div id="chave-b">
+                    <button type="button" class="btn btn-primary">Time C</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time D</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+                <div id="chave-c">
+                    <button type="button" class="btn btn-primary">Time E</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time F</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+                <div id="chave-d">
+                    <button type="button" class="btn btn-primary">Time G</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time H</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+            </div>
+            <div class="quartas">
+                QUARTAS DE FINAL
+                <div id="chave-i">
+                    <button type="button" class="btn btn-primary">Time 1</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 2</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+                <div id="chave-j">
+                    <button type="button" class="btn btn-primary">Time 3</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 4</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+            </div>
+            <div class="semi">
+                SEMI DE FINAL
+                <div id="chave-n">
+                    <button type="button" class="btn btn-primary">Time 1</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 2</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+            </div>
+            <div id="final">
+                FINAL
+                <div id="chave-o">
+                    <button type="button" class="btn btn-primary">Time 1</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 2</button>
+                    <button type="button" class="btn btn-info">0</button>
+                </div>
+            </div>
+            <div class="semi">
+                SEMI DE FINAL
+                <div id="chave-m">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 5</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 6</button>
+                </div>
+            </div>
+            <div class="quartas">
+                QUARTAS DE FINAL
+                <div id="chave-k">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 5</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 6</button>
+                </div>
+                <div id="chave-l">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 7</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time 8</button>
+                </div>
+            </div>
+            <div class="oitavas">
+                OITAVAS DE FINAL
+                <div id="chave-e">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time I</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time J</button>
+                </div>
+                <div id="chave-f">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time K</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time L</button>
+                </div>
+                <div id="chave-g">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time M</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time N</button>
+                </div>
+                <div id="chave-h">
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time O</button>
+                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">Time P</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

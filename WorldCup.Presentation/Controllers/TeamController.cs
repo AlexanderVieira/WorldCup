@@ -10,11 +10,7 @@ namespace WorldCup.Presentation.Controllers
     {
         private readonly ITeamAppService _teamAppService;
         private readonly IMatchAppService _matchAppService;
-        private readonly IRafflesAppService _rafflesAppService;
-
-        public TeamController()
-        {
-        }
+        private readonly IRafflesAppService _rafflesAppService;        
 
         public TeamController(ITeamAppService teamAppService, 
             IMatchAppService matchAppService, IRafflesAppService rafflesAppService)
