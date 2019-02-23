@@ -6,6 +6,7 @@ using WorldCup.Infra.InMemory.Context;
 using WorldCup.Infra.InMemory.Repositories;
 using Xunit;
 using FluentAssertions;
+using WorldCup.Domain.Interfaces.Repositories;
 
 namespace WorldCup.XUnitTest
 {
@@ -102,7 +103,7 @@ namespace WorldCup.XUnitTest
 
         }
 
-        private TeamRepository GetInMemoryTeamRepository()
+        private ITeamRepository GetInMemoryTeamRepository()
         {
             DbContextOptions<WorldCupContext> options;
             var builder = new DbContextOptionsBuilder<WorldCupContext>();
