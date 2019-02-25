@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WorldCup.Domain.Entities.Team
+@{
     ViewData["Title"] = "Copa do Mundo";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,7 +22,7 @@
 
         #container {
             position: relative;
-            width: 1040px;
+            width: 1160px;
             height: 800px;
             margin-top: 20px;
             margin-right: auto;
@@ -55,18 +56,18 @@
 
         #painel {
             position: relative;
-            width: 1000px;
+            width: 100%;
             height: 550px;
             margin-top: 20px;
             margin-right: auto;
             margin-left: auto;
-            /*border: 1px solid #000; 			*/
+            /*border: 1px solid #000;*/
         }
 
         .oitavas {
             position: relative;
             float: left;
-            width: 120px;
+            width: 140px;
             height: 500px;
             /*border: 1px solid #000;*/
             margin-top: 20px;
@@ -77,7 +78,7 @@
         .quartas {
             position: relative;
             float: left;
-            width: 120px;
+            width: 140px;
             height: 250px;
             /*border: 1px solid #000;*/
             margin-top: 125px;
@@ -88,7 +89,7 @@
         .semi {
             position: relative;
             float: left;
-            width: 120px;
+            width: 140px;
             height: 200px;
             /*border: 1px solid #000;*/
             margin-top: 150px;
@@ -99,7 +100,7 @@
         #final {
             position: relative;
             float: left;
-            width: 120px;
+            width: 140px;
             height: 128px;
             /*border: 1px solid #000;*/
             margin-top: 200px;
@@ -110,138 +111,182 @@
         #chave-a, #chave-b, #chave-c, #chave-d, #chave-e, #chave-f, #chave-g,
         #chave-h, #chave-i, #chave-j, #chave-k, #chave-l, #chave-m, #chave-n, #chave-o {
             /*border: 1px solid #000;*/
-            width: 120px;
+            width: 135px;
             height: 100px;
             margin-top: 7px;
         }
 
         button {
             margin-top: 9px;
-        }
+        }        
     </style>
 </head>
-<body>
+<body>    
 
     <div><h2>@ViewData["Title"]</h2></div>
 
+    @{
+        var teamsA = new List<WorldCup.Domain.Entities.Team>();
+        var teamsB = new List<WorldCup.Domain.Entities.Team>();
+
+        var dictOctavesFinal = (Dictionary<string, List<WorldCup.Domain.Entities.Team>>)ViewBag.resultOctavesFinal;
+
+        for (int i = 0; i < dictOctavesFinal.Count; i++)
+        {
+            teamsA = dictOctavesFinal.Values.ElementAt(0);
+            teamsB = dictOctavesFinal.Values.ElementAt(1);
+        }
+
+        var teamsC = new List<WorldCup.Domain.Entities.Team>();
+        var teamsD = new List<WorldCup.Domain.Entities.Team>();
+
+        var dictQuarterFinal = (Dictionary<string, List<WorldCup.Domain.Entities.Team>>)ViewBag.classifiedSelectionsForQuarterFinals;
+
+        for (int i = 0; i < dictQuarterFinal.Count; i++)
+        {
+            teamsC = dictQuarterFinal.Values.ElementAt(0);
+            teamsD = dictQuarterFinal.Values.ElementAt(1);
+        }
+
+        var teamsE = new List<WorldCup.Domain.Entities.Team>();
+        var teamsF = new List<WorldCup.Domain.Entities.Team>();
+
+        var dictSemiFinal = (Dictionary<string, List<WorldCup.Domain.Entities.Team>>)ViewBag.classifiedSelectionsForSemiFinals;
+
+        for (int i = 0; i < dictSemiFinal.Count; i++)
+        {
+            teamsE = dictSemiFinal.Values.ElementAt(0);
+            teamsF = dictSemiFinal.Values.ElementAt(1);
+        }
+
+        var teamsG = new List<WorldCup.Domain.Entities.Team>();
+        var teamsH = new List<WorldCup.Domain.Entities.Team>();
+
+        var dictFinal = (Dictionary<string, List<WorldCup.Domain.Entities.Team>>)ViewBag.classifiedSelectionsForFinal;
+
+        for (int i = 0; i < dictFinal.Count; i++)
+        {
+            teamsG = dictFinal.Values.ElementAt(0);
+            teamsH = dictFinal.Values.ElementAt(1);
+        }
+    }
+
     <div id="container">
         <header>
-
             <div class="panel panel-primary">
                 <div class="panel-body panel-heading">CONFRONTOS ELIMINATÓRIOS</div>
             </div>
-
         </header>
         <div id="painel">
             <div class="oitavas">
                 <h5>OITAVAS DE FINAL</h5>
                 <div id="chave-a">
-                    <button type="button" class="btn btn-primary">Time A</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time B</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsA[0].Name</button>
+                    <button type="button" class="btn btn-info">@teamsA[0].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[0].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[0].Scoreboard</button>
                 </div>
                 <div id="chave-b">
-                    <button type="button" class="btn btn-primary">Time C</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time D</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsA[1].Name</button>
+                    <button type="button" class="btn btn-info">@teamsA[1].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[1].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[1].Scoreboard</button>
                 </div>
                 <div id="chave-c">
-                    <button type="button" class="btn btn-primary">Time E</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time F</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsA[2].Name</button>
+                    <button type="button" class="btn btn-info">@teamsA[2].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[2].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[2].Scoreboard</button>
                 </div>
                 <div id="chave-d">
-                    <button type="button" class="btn btn-primary">Time G</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time H</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsA[3].Name</button>
+                    <button type="button" class="btn btn-info">@teamsA[3].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[3].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[3].Scoreboard</button>
                 </div>
             </div>
             <div class="quartas">
                 QUARTAS DE FINAL
                 <div id="chave-i">
-                    <button type="button" class="btn btn-primary">Time 1</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 2</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsC[0].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[0].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[1].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[1].Scoreboard</button>
                 </div>
                 <div id="chave-j">
-                    <button type="button" class="btn btn-primary">Time 3</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 4</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsC[2].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[2].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[3].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[3].Scoreboard</button>
                 </div>
             </div>
             <div class="semi">
                 SEMI DE FINAL
                 <div id="chave-n">
-                    <button type="button" class="btn btn-primary">Time 1</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 2</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsE[0].Name</button>
+                    <button type="button" class="btn btn-info">@teamsE[0].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsE[1].Name</button>
+                    <button type="button" class="btn btn-info">@teamsE[1].Scoreboard</button>
                 </div>
             </div>
             <div id="final">
                 FINAL
                 <div id="chave-o">
-                    <button type="button" class="btn btn-primary">Time 1</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 2</button>
-                    <button type="button" class="btn btn-info">0</button>
+                    <button type="button" class="btn btn-primary">@teamsG[0].Name</button>
+                    <button type="button" class="btn btn-info">@teamsG[0].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsG[1].Name</button>
+                    <button type="button" class="btn btn-info">@teamsG[1].Scoreboard</button>
                 </div>
             </div>
             <div class="semi">
                 SEMI DE FINAL
                 <div id="chave-m">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 5</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 6</button>
+                    <button type="button" class="btn btn-info">@teamsE[2].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsE[2].Name</button>
+                    <button type="button" class="btn btn-info">@teamsE[3].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsE[3].Name</button>
                 </div>
             </div>
             <div class="quartas">
                 QUARTAS DE FINAL
                 <div id="chave-k">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 5</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 6</button>
+                    <button type="button" class="btn btn-info">@teamsC[4].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[4].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[5].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[5].Name</button>
                 </div>
                 <div id="chave-l">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 7</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time 8</button>
+                    <button type="button" class="btn btn-info">@teamsC[6].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[6].Name</button>
+                    <button type="button" class="btn btn-info">@teamsC[7].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsC[7].Name</button>
                 </div>
             </div>
             <div class="oitavas">
                 OITAVAS DE FINAL
                 <div id="chave-e">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time I</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time J</button>
+                    <button type="button" class="btn btn-info">@teamsA[4].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsA[4].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[4].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[4].Name</button>
                 </div>
                 <div id="chave-f">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time K</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time L</button>
+                    <button type="button" class="btn btn-info">@teamsA[5].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsA[5].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[5].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[5].Name</button>
                 </div>
                 <div id="chave-g">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time M</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time N</button>
+                    <button type="button" class="btn btn-info">@teamsA[6].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsA[6].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[6].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[6].Name</button>
                 </div>
                 <div id="chave-h">
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time O</button>
-                    <button type="button" class="btn btn-info">0</button>
-                    <button type="button" class="btn btn-primary">Time P</button>
+                    <button type="button" class="btn btn-info">@teamsA[7].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsA[7].Name</button>
+                    <button type="button" class="btn btn-info">@teamsB[7].Scoreboard</button>
+                    <button type="button" class="btn btn-primary">@teamsB[7].Name</button>
                 </div>
             </div>
         </div>

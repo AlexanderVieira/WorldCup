@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Linq;
 using WorldCup.Application.Interfaces;
 using WorldCup.Domain.Entities;
@@ -10,9 +11,9 @@ namespace WorldCup.Presentation.Controllers
     {
         private readonly ITeamAppService _teamAppService;
         private readonly IMatchAppService _matchAppService;
-        private readonly IRafflesAppService _rafflesAppService;        
+        private readonly IRafflesAppService _rafflesAppService;
 
-        public TeamController(ITeamAppService teamAppService, 
+        public TeamController(ITeamAppService teamAppService,
             IMatchAppService matchAppService, IRafflesAppService rafflesAppService)
         {
             _teamAppService = teamAppService;
@@ -43,29 +44,50 @@ namespace WorldCup.Presentation.Controllers
             _teamAppService.Add(new Team("Mexico", "Mex"));
             _teamAppService.Add(new Team("Costa Rica", "COS"));
 
-            var selections = _teamAppService.GetAll().ToList();
+            // LISTA DE SELECOES OITAVAS DE FINAL - SORTEIO
+            var selections = _teamAppService.GetAll().ToList();                        
             var selectionsRafflesOctavesFinals = _rafflesAppService.RafflesOctavesFinal(selections);
-            ViewBag.selectionsRafflesOctavesFinals = selectionsRafflesOctavesFinals;            
-            var classifiedSelectionsForQuarterFinals = _matchAppService.PlayOctavesFinal(selectionsRafflesOctavesFinals);
+            
+            // CONFRONTOS OITAVAS DE FINAL
+            var resultOctavesFinal = _matchAppService.PlayOctavesFinal(selectionsRafflesOctavesFinals);
+
+            // VENCEDORES OITAVAS DE FINAL
+            ViewBag.resultOctavesFinal = resultOctavesFinal;
+            var winnersOctaves = resultOctavesFinal.Values.ElementAt(0);
+            var disqualifiedsOctaves = resultOctavesFinal.Values.ElementAt(1);
 
             //################################################# QUARTAS DE FINAL ##############################################
-            
-            ViewBag.classifiedSelectionsForQuarterFinals = classifiedSelectionsForQuarterFinals;
-            var selectionsRafflesQuarterFinals = _rafflesAppService.RafflesQuarterFinal(classifiedSelectionsForQuarterFinals);
+
+            ViewBag.classifiedSelectionsForQuarterFinals = resultOctavesFinal;
+
+            // VENCEDORES DAS OITAVAS DE FINAL - SORTEIO
+            var selectionsRafflesQuarterFinals = _rafflesAppService.RafflesQuarterFinal(winnersOctaves);
             ViewBag.selectionsRafflesQuarterFinals = selectionsRafflesQuarterFinals;
+
+            // CONFRONTOS QUARTAS DE FINAL
             var classifiedSelectionsForSemiFinal = _matchAppService.PlayQuarterFinal(selectionsRafflesQuarterFinals);
 
-            //#################################################### SEMI-FINAL #################################################
+            // VENCEDORES DAS QUARTAS DE FINAL - SORTEIO
+            var winnersQuarters = classifiedSelectionsForSemiFinal.Values.ElementAt(0);
+            var disqualifiedsQuarters = classifiedSelectionsForSemiFinal.Values.ElementAt(1);
 
+            //#################################################### SEMI-FINAL #################################################
+                        
             ViewBag.classifiedSelectionsForSemiFinals = classifiedSelectionsForSemiFinal;
-            var selectionsRafflesSemiFinals = _rafflesAppService.RafflesSemiFinal(classifiedSelectionsForSemiFinal);
+            var selectionsRafflesSemiFinals = _rafflesAppService.RafflesSemiFinal(winnersQuarters);
             ViewBag.selectionsRafflesSemiFinals = selectionsRafflesSemiFinals;
+
+            // VENCEDORES DAS SEMI-FINAIS
             var classifiedSelectionsForFinal = _matchAppService.PlaySemiFinal(selectionsRafflesSemiFinals);
+
+            // VENCEDORES DAS SEMI DE FINAIS
+            var winnersSemiFinal = classifiedSelectionsForFinal.Values.ElementAt(0);
+            var disqualifiedsSemiFinal = classifiedSelectionsForFinal.Values.ElementAt(1);
 
             //###################################################### FINAL ####################################################
 
             ViewBag.classifiedSelectionsForFinal = classifiedSelectionsForFinal;
-            var selectionChampion = _matchAppService.PlayFinal(classifiedSelectionsForFinal);
+            var selectionChampion = _matchAppService.PlayFinal(winnersSemiFinal);
 
             return View();
         }

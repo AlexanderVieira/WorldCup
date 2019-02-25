@@ -10,20 +10,23 @@ namespace WorldCup.DomainService.Services
     public class MatchService : IMatchService        
     {
         private readonly ITeamRepository _teamRepository;
-        private List<Team> _selections;        
+        private List<Team> _disqualifiedSelectionsOctavesFinal;
+        private List<Team> _disqualifiedSelectionsQuarterFinal;
+        private List<Team> _disqualifiedSelectionsSemiFinal;
+        private List<Team> _classifiedSelections;
         
         public MatchService(ITeamRepository teamRepository)
         {
-            _teamRepository = teamRepository;                     
-        }        
+            _teamRepository = teamRepository;
+            _disqualifiedSelectionsOctavesFinal = new List<Team>();
+            _disqualifiedSelectionsQuarterFinal = new List<Team>();
+            _disqualifiedSelectionsSemiFinal = new List<Team>();
+        }
 
-        public List<Team> PlayOctavesFinal(Dictionary<string, List<Team>> dictOctavesFinal)
+        public Dictionary<string, List<Team>> PlayOctavesFinal(Dictionary<string, List<Team>> dictOctavesFinal)
         {
-            //var _selections = new List<Team>();
-            //var dictOctavesFinal = keyValues;
-            var rnd = new Random();
-
-
+            var rnd = new Random();            
+            
             for (int i = 0; i < 8; i++)
             {
                 while (true)
@@ -44,12 +47,14 @@ namespace WorldCup.DomainService.Services
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
                         _teamRepository.Add(teamA);
+                        _disqualifiedSelectionsOctavesFinal.Add(teamB);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dictOctavesFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
                         _teamRepository.Add(teamB);
+                        _disqualifiedSelectionsOctavesFinal.Add(teamA);
                         i++;
                     }
                     else
@@ -58,10 +63,17 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections = _teamRepository.GetAll().ToList();
+
+            _classifiedSelections = _teamRepository.GetAll().ToList();
+            var dictResultOctavesFinal = new Dictionary<string, List<Team>> {
+
+                { "Winner", _classifiedSelections },
+                { "Disqualified", _disqualifiedSelectionsOctavesFinal}
+            };
+            return dictResultOctavesFinal;
         }
 
-        public List<Team> PlayQuarterFinal(Dictionary<string, List<Team>> dictQuarterFinal)
+        public Dictionary<string, List<Team>> PlayQuarterFinal(Dictionary<string, List<Team>> dictQuarterFinal)
         {            
             var rnd = new Random();
 
@@ -85,12 +97,14 @@ namespace WorldCup.DomainService.Services
                     {
                         dictQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
                         _teamRepository.Add(teamA);
+                        _disqualifiedSelectionsQuarterFinal.Add(teamB);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dictQuarterFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
                         _teamRepository.Add(teamB);
+                        _disqualifiedSelectionsQuarterFinal.Add(teamA);
                         i++;
                     }
                     else
@@ -99,10 +113,17 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections = _teamRepository.GetAll().ToList();
+            
+            _classifiedSelections = _teamRepository.GetAll().ToList();
+            var dictResultQuarterFinal = new Dictionary<string, List<Team>> {
+
+                { "Winner", _classifiedSelections },
+                { "Disqualified", _disqualifiedSelectionsQuarterFinal}
+            };
+            return dictResultQuarterFinal;
         }
 
-        public List<Team> PlaySemiFinal(Dictionary<string, List<Team>> dictSemiFinal)
+        public Dictionary<string, List<Team>> PlaySemiFinal(Dictionary<string, List<Team>> dictSemiFinal)
         {            
             var rnd = new Random();
 
@@ -126,12 +147,14 @@ namespace WorldCup.DomainService.Services
                     {
                         dictSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(1);
                         _teamRepository.Add(teamA);
+                        _disqualifiedSelectionsSemiFinal.Add(teamB);
                         i++;
                     }
                     else if (teamA.Scoreboard < teamB.Scoreboard)
                     {
                         dictSemiFinal["Key:" + (i + 1).ToString()].RemoveAt(0);
                         _teamRepository.Add(teamB);
+                        _disqualifiedSelectionsSemiFinal.Add(teamA);
                         i++;
                     }
                     else
@@ -140,7 +163,13 @@ namespace WorldCup.DomainService.Services
                     }
                 }
             }
-            return _selections = _teamRepository.GetAll().ToList();
+            _classifiedSelections = _teamRepository.GetAll().ToList();
+            var dictResultSemiFinal = new Dictionary<string, List<Team>> {
+
+                { "Winner", _classifiedSelections },
+                { "Disqualified", _disqualifiedSelectionsSemiFinal}
+            };
+            return dictResultSemiFinal;
         }
 
         public Team PlayFinal(List<Team> finals)

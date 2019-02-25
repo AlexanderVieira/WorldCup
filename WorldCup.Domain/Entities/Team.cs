@@ -34,7 +34,7 @@
 
         public override string ToString()
         {
-            return $"{Name} {Flag}";
+            return $"{Name}";
         }
     }
 }

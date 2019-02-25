@@ -9,19 +9,17 @@ namespace WorldCup.DomainService.Services
 {
     public class RafflesService : IRafflesService
     {   
-        private readonly ITeamRepository _teamRepository;
-        //private readonly IMatchService _matchService;
-        //private List<Team> _selections;
+        private readonly ITeamRepository _teamRepository;        
 
         public RafflesService(ITeamRepository teamRepository)
         {
             _teamRepository = teamRepository;
-            //_matchService = matchService;
+            
         }
 
         public Dictionary<string, List<Team>> RafflesOctavesFinal(List<Team> selections)
         {
-            var rnd = new Random();                    
+            var rnd = new Random();            
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
@@ -30,65 +28,70 @@ namespace WorldCup.DomainService.Services
             var key_5 = new List<Team>();
             var key_6 = new List<Team>();
             var key_7 = new List<Team>();
-            var key_8 = new List<Team>();            
+            var key_8 = new List<Team>();
 
             for (int i = 0; i < 2; i++)
             {
-                if (key_1.Count < 2)
-                {                    
-                    var selected = rnd.Next(0, selections.Count());
+                var selected = rnd.Next(0, selections.Count());
+                if (!key_1.Contains(selections[selected]))
+                {
                     key_1.Add(selections[selected]);
-                    //selections.RemoveAt(selected);
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
-
                 }
-                if (key_2.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_2.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
                     key_2.Add(selections[selected]);
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_3.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_3.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_3.Add(selections[selected]);
+                    key_3.Add(selections[selected]);                    
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_4.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_4.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_4.Add(selections[selected]);
+                    key_4.Add(selections[selected]);                    
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_5.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_5.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_5.Add(selections[selected]);
+                    key_5.Add(selections[selected]);                    
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_6.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_6.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_6.Add(selections[selected]);
+                    key_6.Add(selections[selected]);                    
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_7.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_7.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_7.Add(selections[selected]);
+                    key_7.Add(selections[selected]);                   
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
-                if (key_8.Count < 2)
+
+                selected = rnd.Next(0, selections.Count());
+                if (!key_8.Contains(selections[selected]))
                 {
-                    var selected = rnd.Next(0, selections.Count());
-                    key_8.Add(selections[selected]);
+                    key_8.Add(selections[selected]);                    
                     _teamRepository.Remove(selections[selected].TeamId);
                     selections = _teamRepository.GetAll().ToList();
                 }
@@ -112,14 +115,7 @@ namespace WorldCup.DomainService.Services
 
         public Dictionary<string, List<Team>> RafflesQuarterFinal(List<Team> selections)
         {
-            var rnd = new Random();           
-
-            //foreach (var item in _selectionsClassifiedQuarterFinal)
-            //{
-            //    _teamRepository.Add(item);
-            //}
-
-            //selections = _teamRepository.GetAll().ToList();
+            var rnd = new Random();
 
             var key_1 = new List<Team>();
             var key_2 = new List<Team>();
