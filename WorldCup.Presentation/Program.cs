@@ -8,13 +8,7 @@ namespace WorldCup.Presentation
     {
         public static void Main(string[] args)
         {
-            //BuildWebHost(args).Run();
-            new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseStartup<Startup>()
-                .Build()
-                .Run();
+            BuildWebHost(args).Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
