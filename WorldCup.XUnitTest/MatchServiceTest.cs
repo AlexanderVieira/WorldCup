@@ -59,7 +59,7 @@ namespace WorldCup.XUnitTest
 
             // Testando com Assert
             Assert.NotEmpty(list);
-            Assert.Equal(8, list.Count);
+            Assert.Equal(2, list.Count);
 
             // Testando com FluentAssertions
             //dict.Should().ContainKey("Key:1",
@@ -90,7 +90,7 @@ namespace WorldCup.XUnitTest
 
             // Testando com Assert
             Assert.NotEmpty(list);
-            Assert.Equal(4, list.Count);
+            Assert.Equal(2, list.Count);
 
             // Testando com FluentAssertions
             //dict.Should().ContainKey("Key:1",

@@ -35,13 +35,17 @@ namespace WorldCup.DomainService.Services
                     {
                         break;
                     }
-                    var teamA = new Team();
-                    var teamB = new Team();
-                    teamA.Name = dictOctavesFinal["Key:" + (i + 1).ToString()][0].ToString();
-                    teamA.Scoreboard = rnd.Next(0, 6);
+                    var teamA = new Team
+                    {
+                        Name = dictOctavesFinal["Key:" + (i + 1).ToString()][0].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
-                    teamB.Name = dictOctavesFinal["Key:" + (i + 1).ToString()][1].ToString();
-                    teamB.Scoreboard = rnd.Next(0, 6);
+                    var teamB = new Team
+                    {
+                        Name = dictOctavesFinal["Key:" + (i + 1).ToString()][1].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
@@ -85,13 +89,17 @@ namespace WorldCup.DomainService.Services
                     {
                         break;
                     }
-                    var teamA = new Team();
-                    var teamB = new Team();
-                    teamA.Name = dictQuarterFinal["Key:" + (i + 1).ToString()][0].ToString();
-                    teamA.Scoreboard = rnd.Next(0, 6);
+                    var teamA = new Team
+                    {
+                        Name = dictQuarterFinal["Key:" + (i + 1).ToString()][0].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
-                    teamB.Name = dictQuarterFinal["Key:" + (i + 1).ToString()][1].ToString();
-                    teamB.Scoreboard = rnd.Next(0, 6);
+                    var teamB = new Team
+                    {
+                        Name = dictQuarterFinal["Key:" + (i + 1).ToString()][1].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
@@ -135,13 +143,17 @@ namespace WorldCup.DomainService.Services
                     {
                         break;
                     }
-                    var teamA = new Team();
-                    var teamB = new Team();
-                    teamA.Name = dictSemiFinal["Key:" + (i + 1).ToString()][0].ToString();
-                    teamA.Scoreboard = rnd.Next(0, 6);
+                    var teamA = new Team
+                    {
+                        Name = dictSemiFinal["Key:" + (i + 1).ToString()][0].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
-                    teamB.Name = dictSemiFinal["Key:" + (i + 1).ToString()][1].ToString();
-                    teamB.Scoreboard = rnd.Next(0, 6);
+                    var teamB = new Team
+                    {
+                        Name = dictSemiFinal["Key:" + (i + 1).ToString()][1].ToString(),
+                        Scoreboard = rnd.Next(0, 6)
+                    };
 
                     if (teamA.Scoreboard > teamB.Scoreboard)
                     {
@@ -179,13 +191,17 @@ namespace WorldCup.DomainService.Services
 
             while (true)
             {
-                var teamA = new Team();
-                var teamB = new Team();
-                teamA.Name = finals[0].Name;
-                teamA.Scoreboard = rnd.Next(0, 6);
+                var teamA = new Team
+                {
+                    Name = finals[0].Name,
+                    Scoreboard = rnd.Next(0, 6)
+                };
 
-                teamB.Name = finals[1].Name;
-                teamB.Scoreboard = rnd.Next(0, 6);
+                var teamB = new Team
+                {
+                    Name = finals[1].Name,
+                    Scoreboard = rnd.Next(0, 6)
+                };
 
                 if (teamA.Scoreboard > teamB.Scoreboard)
                 {
